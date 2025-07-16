@@ -2,7 +2,7 @@
   "name": "dotenv-creator",
   "displayName": "DotEnv Creator",
   "description": "Create .env files from templates with one click",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "JonathonYamakawa",
   "engines": {
     "vscode": "^1.74.0"

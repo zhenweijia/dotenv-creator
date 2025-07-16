@@ -45,13 +45,20 @@ export function activate(context: vscode.ExtensionContext) {
         
         // Check if .env already exists
         if (fs.existsSync(envPath)) {
-            const overwrite = await vscode.window.showWarningMessage(
-                '.env file already exists. Do you want to overwrite it?',
-                'Yes',
-                'No'
+            const action = await vscode.window.showWarningMessage(
+                '.env file already exists. Would you like to open the existing file or overwrite it?',
+                'Open Existing',
+                'Overwrite',
+                'Cancel'
             );
             
-            if (overwrite !== 'Yes') {
+            if (action === 'Open Existing') {
+                // Open the existing .env file
+                const document = await vscode.workspace.openTextDocument(envPath);
+                await vscode.window.showTextDocument(document);
+                return;
+            } else if (action !== 'Overwrite') {
+                // User selected Cancel or closed the dialog
                 return;
             }
         }
